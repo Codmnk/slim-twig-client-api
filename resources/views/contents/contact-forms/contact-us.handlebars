@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row">
+        
+        {{#if error}}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+        {{/if}}
+        
+        {{#if success_message}}
+        <div class="alert alert-success">
+        {{success_message}}
+        </div>
+        {{/if}}
+        
+        {{#each formError}} <div class="alert alert-danger">{{this}}</div> {{/each}}        
+    </div>
+    <div class="row"> 
+        <h3>Contact Us</h3> 
+            {{!-- <form action="/sendmail" method="post" enctype="multipart/form-data"> --}}
+            <form action="/hc/sendemail/send" method="post" enctype="multipart/form-data">
+                <div class="form-group" style="font-size:20px"> 
+                    <div class="form-group">
+                        <label for="firstName">First name *</label>
+                        <input value="{{formData.firstName}}" required name="firstName" type="text" placeholder="Enter first name">
+                    </div>  
+                    <div class="form-group">   
+                        <label for="lastName">Last name *</label>
+                        <input value="{{formData.lastName}}" required name="lastName" type="text" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address *</label>
+                        <input value="{{formData.email}}" required name="email"  type="email" placeholder="Enter correct email">
+                    </div> 
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input value="{{formData.contactNumber}}"  name="contactNumber" type="text" placeholder="Enter contact number">
+                    </div>  
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input value="{{formData.orderNumber}}"  name="orderNumber" type="text" placeholder="Enter order number">
+                    </div> 
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select name="subject" required style="color:grey">
+                            <option value="" selected disabled> Please select </option>
+                            <option value="General Enquiry">General Enquiry</option>
+                            <option value="About product">About product</option>
+                            <option value="About order and deliver">About order and deliver</option>
+                            <option value="About Claim">About Claim</option>
+                        </select>
+                    </div>  
+                    <div class="form-group">   
+                        <label for="message">Detail Message *</label>
+                        <textarea required name="message" cols='30' rows="5" placeholder="Write a deteail message *" >{{formData.message}}</textarea>
+                    </div>  
+                    <div class="form-group">
+                        <label for="attach">Attachements. Please view this page on your mobile browser if you like to capture a photo of video using your smart phone. </label>
+                        <label for="attach"> Only image and video allowed. Do not exceed 10MB file size.</label>
+                        <p class="attachement"><input type="file" name="attach"  ></p>
+                        
+
+                        {{!-- <span type="addMore" id="addMore" class="btn btn-primary" onclick="addmoreFiles()" >+ Add More files</span> --}}
+                    </div>
+                       
+                    <br>  
+   
+                    <div class="form-group">     
+                        <button type="submit" class="btn btn-primary form-control" >Submit</button>
+                    </div>    
+            </form> 
+    </div>
+</div>

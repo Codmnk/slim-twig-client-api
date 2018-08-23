@@ -1,0 +1,48 @@
+{% extends 'layouts/homeLayout.twig' %}
+
+{% block content %}
+
+<style> 
+    .questions{ 
+        background-color:black; 
+        padding: 10px; 
+        display:block; 
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bolder;
+        text-decoration:none;
+        cursor: pointer;
+    }
+    .answer{
+        padding-left:30px; 
+        margin-top: -10px;  
+        background-color:rgb(24, 23, 23);
+    }
+</style>
+
+<div class="" style="background-color:#2c2c32;">
+    <div class="container">
+        <div class="row"> <p style="margin:30px;"></p> </div>
+            <div >
+                {{ postdata.a }}
+                 {% if postResult %} 
+                    {# {% each postResult %}
+                
+                        <a data-toggle="collapse" data-target="#collapseAns{{ index }}" class="questions">{{{question}}}</a>
+                        
+                        <div id="collapseAns{{ index }}" class="answer collapse">
+                            {{{postDecoder answer}}}
+                        </div>
+                    {% endeach %}  #}
+                {% else %}
+                    <div> <h3>No result found. Please use search option above or brows through the categories. </h3></div>
+                {% endif %}
+
+                
+        
+            </div>
+            
+    </div>
+</div>
+
+{% endblock content %}

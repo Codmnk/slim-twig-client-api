@@ -1,0 +1,18 @@
+{# {{!-- head --}} #}
+{% include "partials/head.twig" %}
+
+ {# <!-- top fix header--> #}
+{% include "partials/top-nav.twig" %}
+
+{# <!-- Banner --> #}
+{% include "partials/page-banner.twig" %}
+
+{% include "partials/breadcrumb-nav.twig" %} 
+
+{# <!-- Main --> #}
+{% block content %}{% endblock %}
+{# {{{body}}} #}
+
+{# <!-- Footer --> #}
+{% include "partials/footer.twig" %} 
+
