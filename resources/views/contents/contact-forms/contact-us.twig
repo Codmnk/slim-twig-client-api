@@ -1,24 +1,31 @@
+{# {{!-- head --}} #}
+{% include "partials/head.twig" %}
+
+ {# <!-- top fix header--> #}
+{% include "partials/top-nav.twig" %}
+
+
 <div class="container">
     <div class="row">
         
-        {{#if error}}
+        {% if error %}
             <div class="alert alert-danger">
                 {{error}}
             </div>
-        {{/if}}
+        {% endif %}
         
-        {{#if success_message}}
-        <div class="alert alert-success">
-        {{success_message}}
-        </div>
-        {{/if}}
+        {% if success_message %}
+            <div class="alert alert-success">
+             {{ success_message}}
+            </div>
+        {% endif %}
         
-        {{#each formError}} <div class="alert alert-danger">{{this}}</div> {{/each}}        
+        {% for error in formError %} <div class="alert alert-danger">{{this}}</div> {% endfor %}        
     </div>
     <div class="row"> 
         <h3>Contact Us</h3> 
-            {{!-- <form action="/sendmail" method="post" enctype="multipart/form-data"> --}}
-            <form action="/hc/sendemail/send" method="post" enctype="multipart/form-data">
+             <form action="{{ base_url() }}/sendmail" method="post" enctype="multipart/form-data">
+            <!-- <form action="/hc/sendemail/send" method="post" enctype="multipart/form-data"> -->
                 <div class="form-group" style="font-size:20px"> 
                     <div class="form-group">
                         <label for="firstName">First name *</label>
@@ -60,7 +67,7 @@
                         <p class="attachement"><input type="file" name="attach"  ></p>
                         
 
-                        {{!-- <span type="addMore" id="addMore" class="btn btn-primary" onclick="addmoreFiles()" >+ Add More files</span> --}}
+                        <!-- <span type="addMore" id="addMore" class="btn btn-primary" onclick="addmoreFiles()" >+ Add More files</span> -->
                     </div>
                        
                     <br>  
@@ -71,3 +78,5 @@
             </form> 
     </div>
 </div>
+{# <!-- Footer --> #}
+{% include "partials/footer.twig" %} 

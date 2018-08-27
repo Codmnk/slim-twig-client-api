@@ -2,7 +2,7 @@
 use App\Models\Fetch;
 
 
-
+// HOME PAGE WITH THE CATEGORIES CARD
 $app->get('/', function($req, $res){
     $fetch = new Fetch();
    $categories = $fetch->getCategories();
@@ -13,6 +13,7 @@ $app->get('/', function($req, $res){
    ));
 });
 
+// TEST HOME PAGE
 $app->get('/home', function($req, $res){
     $fetch = new Fetch();
     $catData = $fetch->getCategories();
@@ -23,4 +24,14 @@ $app->get('/home', function($req, $res){
     return $this->view->render($res, 'contents/category.twig', array(
       'qnaData' => $catData
     ));
+});
+
+// CONTACT US PAGE
+$app->get('/contact-us', function($req, $res){
+    return $this->view->render($res, 'contents/contact-forms/contact-us.twig');
+});
+
+// GET FORM DATA AND SEND EMAIL
+$app->post('/sendmail', function($req, $res){
+    return "form received";
 });
