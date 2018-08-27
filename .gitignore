@@ -1,2 +1,3 @@
 vendor/*
 public/frontEnd/uploads/images/*
+config/Endpoint.php
