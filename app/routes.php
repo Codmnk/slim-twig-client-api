@@ -14,13 +14,17 @@ $app->get('/', function($req, $res){
 });
 
 // TEST HOME PAGE
-$app->get('/home', function($req, $res){
-    $fetch = new Fetch();
-    $catData = $fetch->getCategories();
-    
-    $catData = json_decode($catData);
-    
+$app->get('/category/{s}', function($req, $res){
 
+    $slug = $req->getAttribute('s');
+
+    $fetch = new Fetch();
+    $catData = $fetch->getQNA($slug);
+    $catData = json_decode($catData);
+    // echo "<pre>";
+    // var_dump($catData);
+    // die();
+    
     return $this->view->render($res, 'contents/category.twig', array(
       'qnaData' => $catData
     ));

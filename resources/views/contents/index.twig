@@ -8,7 +8,7 @@
 	
 			{% for item in catData %}
 				<div class="box">
-				<a href="{{ base_url() }}/{{ item.url }}" class="image fit"><img src="{{ base_url() }}/frontEnd/uploads/images/category/{{ item.catThumbnail }}" alt="{{ item.catTitle }}" style="max-height: 338px;" /></a>
+				<a href="{{ base_url() }}/category/{{ item.url }}" class="image fit"><img src="{{ base_url() }}/frontEnd/uploads/images/category/{{ item.catThumbnail }}" alt="{{ item.catTitle }}" style="max-height: 338px;" /></a>
 				<div class="inner">
 					<h3>{{ item.catTitle }}</h3>
 					<p>This section will provide you all the informations about {{ item.catTitle }}.</p>

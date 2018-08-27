@@ -24,17 +24,18 @@
     <div class="container">
         <div class="row"> <p style="margin:30px;"></p> </div>
             <div >
-                {%if catData %}
+                {% if qnaData %}
                 
+                    {% for key, item in qnaData %}
                 
-                    {# {% for key, item in catData %}
-                
-                        <a data-toggle="collapse" data-target="#collapseAns{{ index }}" class="questions">{{{question}}}</a>
+                        <a data-toggle="collapse" data-target="#collapseAns{{ key }}" class="questions">{{ item.question }}</a>
                         
-                        <div id="collapseAns{{ index }}" class="answer collapse">
-                            {{{postDecoder answer}}}
+                        <div id="collapseAns{{ key }}" class="answer collapse">
+                                {% autoescape %}
+                                    {{ item.answer|raw }}
+                                {% endautoescape %}
                         </div>
-                    {% endeach %}  #}
+                    {% endfor %}
                 {% else %}
                     <div> <h4>No records foune! Please try again later.</h4></div>
                 {% endif %}
