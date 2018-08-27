@@ -24,9 +24,10 @@
     <div class="container">
         <div class="row"> <p style="margin:30px;"></p> </div>
             <div >
-                {{ postdata.a }}
-                 {% if postResult %} 
-                    {# {% each postResult %}
+                {%if catData %}
+                
+                
+                    {# {% for key, item in catData %}
                 
                         <a data-toggle="collapse" data-target="#collapseAns{{ index }}" class="questions">{{{question}}}</a>
                         
@@ -35,7 +36,7 @@
                         </div>
                     {% endeach %}  #}
                 {% else %}
-                    <div> <h3>No result found. Please use search option above or brows through the categories. </h3></div>
+                    <div> <h4>No records foune! Please try again later.</h4></div>
                 {% endif %}
 
                 
@@ -45,4 +46,4 @@
     </div>
 </div>
 
-{% endblock content %}
+{% endblock %}

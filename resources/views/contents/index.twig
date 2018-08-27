@@ -1,0 +1,31 @@
+{% extends 'layouts/homeLayout.twig' %}
+
+{% block content %}
+
+	
+<!-- Boxes --> 
+<div class="thumbnails">
+			{% for item in catData %}
+				<div class="box">
+				<a href="/hc/category/{{ item.url }}" class="image fit"><img src="/hc/frontEnd/uploads/images/category/{{ item.catThumbnail }}" alt="{{ item.catTitle }}" style="max-height: 338px;" /></a>
+				<div class="inner">
+					<h3>{{ item.catTitle }}</h3>
+					<p>This section will provide you all the informations about {{ item.catTitle }}.</p>
+					<a href="/hc/category/{{ item.url }}" class="button fit" >Find More >></a>
+				</div>
+				</div>
+			{% endfor %}
+
+		<div class="box">
+			<a href="/hc/contact-us" class="image fit"><img src="/hc/frontEnd/uploads/images/category/1525673966346-yoann-boyer-214415-unsplash.jpg" alt="Contact us"  /></a>
+			<div class="inner">
+				<h3>Get In Touch</h3>
+				<p>If you still can not find the answer you are looking for, get in touch with us.</p>
+				<a href="/hc/contact-us" class="button fit" >Contact Us >></a>
+			</div>
+		</div> 
+	</div>
+
+</div>
+</div>
+{% endblock %}
