@@ -1173,7 +1173,7 @@
 		padding: 4em 4em 4em 4em;
 		/* min-height: 45vh; */
 		/* background-image: url("../../images/banner.jpg"); */
-		background-image: url("/hc/frontEnd/uploads/images/home/banner-background.jpg");
+		background-image: url("../../frontEnd/uploads/images/home/banner-background.jpg");
 		opacity: 0.7;
 		background-position: center;
 		background-size: cover;
@@ -1439,4 +1439,4 @@ a{
 ol, ul {
 	list-style: none;
 }
- 
+

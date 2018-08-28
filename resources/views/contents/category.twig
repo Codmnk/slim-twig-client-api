@@ -1,4 +1,4 @@
-{% extends 'layouts/homeLayout.twig' %}
+{% extends 'layouts/categoryLayout.twig' %}
 
 {% block content %}
 
@@ -17,6 +17,7 @@
         padding-left:30px; 
         margin-top: -10px;  
         background-color:rgb(24, 23, 23);
+        font-size: 18px;
     }
 </style>
 
@@ -25,17 +26,18 @@
         <div class="row"> <p style="margin:30px;"></p> </div>
             <div >
                 {% if qnaData %}
-                
+                  
+                  
                     {% for key, item in qnaData %}
                 
                         <a data-toggle="collapse" data-target="#collapseAns{{ key }}" class="questions">{{ item.question }}</a>
                         
                         <div id="collapseAns{{ key }}" class="answer collapse">
-                                {% autoescape %}
-                                    {{ item.answer|raw }}
+                                {% autoescape false %}
+                                 {{ item.answer }}
                                 {% endautoescape %}
-                        </div>
-                    {% endfor %}
+                         </div>
+                    {% endfor %} 
                 {% else %}
                     <div> <h4>No records foune! Please try again later.</h4></div>
                 {% endif %}

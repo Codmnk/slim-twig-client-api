@@ -22,6 +22,14 @@ $container['view'] = function($container) {
         $container->request->getUri()
     ));
 
+    $filter = new Twig_SimpleFilter('htmlDecode', function ($string) {
+        return html_entity_decode($string);
+    });
+
+    // $view = new Twig_Environment($view);
+    // $view->addFilter($filter);
+    
+
     return $view;
 };
 
