@@ -1,3 +1,3 @@
 vendor/*
 public/frontEnd/uploads/images/*
-config/Endpoint.php
+app/config/Endpoint.php
