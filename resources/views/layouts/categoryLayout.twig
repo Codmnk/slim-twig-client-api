@@ -1,0 +1,23 @@
+{# {{!-- head --}} #}
+{% include "partials/head.twig" %}
+
+ {# <!-- top fix header--> #}
+{% include "partials/top-nav.twig" %}
+
+{# <!-- Banner --> #}
+{% include "partials/qna-banner.twig" %}
+
+{% include "partials/breadcrumb-nav.twig" %} 
+
+{# <!-- Main --> #}
+{% block content %}{% endblock %}
+{# {{{body}}} #}
+
+{#!-- link to the constact form --#}
+{% include "partials/send-to-contact.twig" %}
+
+{# <!-- Footer --> #}
+{% include "partials/footer.twig" %} 
+
+
+
