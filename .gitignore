@@ -1,3 +1,4 @@
 vendor/*
 public/frontEnd/uploads/images/*
 app/config/Endpoint.php
+app/config/Smtp.php
