@@ -37,5 +37,8 @@ $app->get('/contact-us', function($req, $res){
 
 // GET FORM DATA AND SEND EMAIL
 $app->post('/sendmail', function($req, $res){
-    return "form received";
+    $smtp = new Smtp();
+    echo "<pre>";
+    var_dump($req->getParsedBody());
+    // return "form received";
 });
