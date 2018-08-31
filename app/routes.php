@@ -1,8 +1,13 @@
 <?php
 use App\Models\Fetch;
+use App\config\Smtp;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// HOME PAGE WITH THE CATEGORIES CARD
+$mail = new PHPMailer(true); 
+
+// HOME PAGE WITH THE CATEGORIES CARDS
 $app->get('/', function($req, $res){
     $fetch = new Fetch();
    $categories = $fetch->getCategories();
@@ -14,6 +19,7 @@ $app->get('/', function($req, $res){
 });
 
 
+// SINGLE CATEGORY PAGE WITH LIST OF QUESTI AND ANSWERS
 $app->get('/category/{s}', function($req, $res){
     $slug = $req->getAttribute('s');
 
@@ -37,8 +43,30 @@ $app->get('/contact-us', function($req, $res){
 
 // GET FORM DATA AND SEND EMAIL
 $app->post('/sendmail', function($req, $res){
+    // GET FORM DATAT
+    $formData = $req->getParsedBody();
+    
+   
+    // GET ATTACHEMENT NAMED 'attach'
+    $attach = $req->getUploadedFiles();
+    $newFile = $attach['attach'];
+
+    if($newFile->getError() === UPLOAD_ERR_OK){
+        //VALIDATE THE IMAGE AND PROCESS
+    }else{
+        array_push($formData, array('attachment' => false));
+    }
+
+
     $smtp = new Smtp();
-    echo "<pre>";
-    var_dump($req->getParsedBody());
-    // return "form received";
+    
+    $result = $smtp->sendMail($formData);
+    echo $result;
+
+        // if(!$mail->send()) {
+        //     $app->flash("error", "We're having trouble with our mail servers at the moment.  Please try again later, or contact us directly by phone.");
+        //     error_log('Mailer Error: ' . $mail->errorMessage());
+        //     $app->halt(500);
+        // } 
+
 });
