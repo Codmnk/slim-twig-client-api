@@ -32,28 +32,13 @@ class Fetch {
             //FOR E.G.     https://www.bigdiscount.com.au/hc/hc-api/public/category/sales-and-orders
             $response = file_get_contents($this->SITE_URL . $this->QNA_ENDPOINT);
             $response = json_decode($response);
-            
-            // RETURNS HTML_ENTITY_DECODED QUESTION AND ANSWER ARRAY
-            $htmlEncodedArg = $this->getcleanData($response);
-            return $htmlEncodedArg;
+            return $response;
 
         }catch(Exception $e){
             $response = '{"Error": {"Message": "$e->getMessage"}}';
             return $response; 
         }
 
-    }
-
-    public function getcleanData($catArgs)
-    {
-        $catData = [];//temporary array holder
-        for($i=0; $i<count($catArgs); $i++){
-            $catData[$i]['question'] =  html_entity_decode($catArgs[$i]->question);
-            $catData[$i]['answer'] = html_entity_decode($catArgs[$i]->answer);
-            $catData[$i]['imgUri'] = html_entity_decode($catArgs[$i]->answer);
-        }
-
-        return $catData;
     }
 
     public function getThumbnail($s)

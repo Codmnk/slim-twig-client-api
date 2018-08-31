@@ -30,11 +30,11 @@
                   
                     {% for key, item in qnaData %}
                 
-                        <a data-toggle="collapse" data-target="#collapseAns{{ key }}" class="questions">{{ item.question }}</a>
+                        <a data-toggle="collapse" data-target="#collapseAns{{ key }}" class="questions">{{ item.question|htmlDecode }}</a>
                         
                         <div id="collapseAns{{ key }}" class="answer collapse">
                                 {% autoescape false %}
-                                 {{ item.answer }}
+                                 {{ item.answer|htmlDecode }}
                                 {% endautoescape %}
                          </div>
                     {% endfor %} 

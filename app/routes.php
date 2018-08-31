@@ -58,10 +58,10 @@ $app->post('/sendmail', function($req, $res){
     }
 
 
-    $smtp = new Smtp();
+    // $smtp = new Smtp();
     
-    $result = $smtp->sendMail($formData);
-    echo $result;
+    // $result = $smtp->sendMail($formData);
+    // echo $result;
 
         // if(!$mail->send()) {
         //     $app->flash("error", "We're having trouble with our mail servers at the moment.  Please try again later, or contact us directly by phone.");

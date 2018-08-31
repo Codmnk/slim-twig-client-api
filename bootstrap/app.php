@@ -27,8 +27,8 @@ $container['view'] = function($container) {
         return html_entity_decode($string);
     });
 
-    // $view = new Twig_Environment($view);
-    // $view->addFilter($filter);
+    $twigEnv = $view->getEnvironment();
+    $twigEnv->addFilter($filter);
     
 
     return $view;
