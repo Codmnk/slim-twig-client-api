@@ -2,7 +2,7 @@
 
 namespace App\config;
 
-class Smtp {
+class SmtpSample {
     protected $SMTP = array(
         'host' => '',
         'user' => '',
