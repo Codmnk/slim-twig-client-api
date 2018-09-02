@@ -1,5 +1,5 @@
 <?php
-use App\Models\Fetch;
+// use App\Models\Fetch;
 use App\config\Smtp;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -8,41 +8,19 @@ use PHPMailer\PHPMailer\Exception;
 $mail = new PHPMailer(true); 
 
 // HOME PAGE WITH THE CATEGORIES CARDS
-$app->get('/', function($req, $res){
-    $fetch = new Fetch();
-   $categories = $fetch->getCategories();
-//    $categories = json_decode($categories);
-   
-   return $this->view->render($res, 'contents/index.twig', array(
-       'catData' => $categories
-   ));
-});
-
+$app->get('/', 'HomeController:index');
 
 // SINGLE CATEGORY PAGE WITH LIST OF QUESTI AND ANSWERS
-$app->get('/category/{s}', function($req, $res){
-    $slug = $req->getAttribute('s');
+$app->get('/category/[{uri}]', 'CategoryController:index');
 
-    $fetch = new Fetch();
-
-    // GET BANNER IMAGE URI
-    $catInfo = $fetch->getThumbnail($slug);
-    
-    $catData = $fetch->getQNA($slug);
-
-    return $this->view->render($res, 'contents/category.twig', array(
-      'qnaData' => $catData,
-      'catInfo' => $catInfo
-    ));
-});
 
 // CONTACT US PAGE
-$app->get('/contact-us', function($req, $res){
-    return $this->view->render($res, 'contents/contact-forms/contact-us.twig');
-});
+$app->get('/contact-us', 'ContactUsController:index');
+
 
 // GET FORM DATA AND SEND EMAIL
-$app->post('/sendmail', function($req, $res){
+$app->post('/sendmail', 'ContactUsController:sendMail');
+$app->post('/sendmail-', function($req, $res){
     // GET FORM DATAT
     $formData = $req->getParsedBody();
     

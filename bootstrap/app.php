@@ -34,4 +34,17 @@ $container['view'] = function($container) {
     return $view;
 };
 
+
+$container['HomeController'] = function($container){
+    return new \App\Controllers\HomeController($container);
+};
+
+$container['CategoryController'] = function($container){
+    return new \App\Controllers\CategoryController($container);
+};
+
+$container['ContactUsController'] = function($container){
+    return new \App\Controllers\ContactUsController($container);
+};
+
 require '../app/routes.php';
