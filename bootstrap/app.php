@@ -43,4 +43,8 @@ $container['CategoryController'] = function($container){
     return new \App\Controllers\CategoryController($container);
 };
 
+$container['ContactUsController'] = function($container){
+    return new \App\Controllers\ContactUsController($container);
+};
+
 require '../app/routes.php';

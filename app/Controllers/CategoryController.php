@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-
-use App\config\Smtp;
-
 class CategoryController extends Controller
 {
     

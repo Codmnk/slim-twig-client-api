@@ -15,12 +15,12 @@ $app->get('/category/[{uri}]', 'CategoryController:index');
 
 
 // CONTACT US PAGE
-$app->get('/contact-us', function($req, $res){
-    return $this->view->render($res, 'contents/contact-forms/contact-us.twig');
-});
+$app->get('/contact-us', 'ContactUsController:index');
+
 
 // GET FORM DATA AND SEND EMAIL
-$app->post('/sendmail', function($req, $res){
+$app->post('/sendmail', 'ContactUsController:sendMail');
+$app->post('/sendmail-', function($req, $res){
     // GET FORM DATAT
     $formData = $req->getParsedBody();
     
