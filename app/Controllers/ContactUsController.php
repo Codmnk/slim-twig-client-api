@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
-use App\config\Smtp;
+use App\Helper\MailHelper as mailHelper; 
 
 class ContactUsController extends Controller
 {
@@ -31,6 +31,8 @@ class ContactUsController extends Controller
             return $res->withRedirect($this->router->pathFor('contact-us'));
         }
 
+        
+        
         // // GET ATTACHEMENT NAMED 'attach'
         // $attach = $req->getUploadedFiles();
         // $newFile = $attach['attach'];
@@ -41,20 +43,15 @@ class ContactUsController extends Controller
         //     array_push($formData, array('attachment' => false));
         // }
         
-        // $smtp = new Smtp();
-    
-    // $result = $smtp->sendMail($formData);
-    // echo $result;
-
-        // if(!$mail->send()) {
-        //     $app->flash("error", "We're having trouble with our mail servers at the moment.  Please try again later, or contact us directly by phone.");
-        //     error_log('Mailer Error: ' . $mail->errorMessage());
-        //     $app->halt(500);
-        // } 
-
         
-        $this->flash->addMessage('info', 'Your message has been sent, we will get back to you with in 24 -48 hours.');
+        $result = mailHelper::sendEmail($frmData);
 
+        if($result === 'Success'){
+            $this->flash->addMessage('info', 'Your message has been sent, we will get back to you with in 24 -48 hours.');
+        }else{
+            $this->flash->addMessage('error', $result . " Please try again later, or send an email to help@bigdiscount.com.au.");
+        }
+        
         return $res->withRedirect($this->router->pathFor('contact-us'));
         
     }
