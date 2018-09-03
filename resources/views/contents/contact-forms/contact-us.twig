@@ -4,15 +4,11 @@
  {# <!-- top fix header--> #}
 {% include "partials/top-nav.twig" %}
 
-
 <div class="container">
+    
+    {% include "partials/flash.twig" %}
+
     <div class="row">
-        {% if error %}
-            <div class="alert alert-danger">
-                {{error}}
-            </div>
-        {% endif %}
-        
         {% if success_message %}
             <div class="alert alert-success">
              {{ success_message}}
@@ -94,7 +90,9 @@
    
                     <div class="form-group">     
                         <button type="submit" class="btn btn-primary form-control" >Submit</button>
-                    </div>    
+                    </div>  
+                    
+                    {{ csrf.field | raw }}
             </form> 
     </div>
 </div>

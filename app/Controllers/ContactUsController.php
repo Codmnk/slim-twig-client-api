@@ -15,7 +15,6 @@ class ContactUsController extends Controller
 
     public function sendMail($req, $res)
     {
-        
         $frmData = $req->getParams();
 
         $validation = $this->validator->validate($req, [
@@ -52,6 +51,11 @@ class ContactUsController extends Controller
         //     error_log('Mailer Error: ' . $mail->errorMessage());
         //     $app->halt(500);
         // } 
+
+        
+        $this->flash->addMessage('info', 'Your message has been sent, we will get back to you with in 24 -48 hours.');
+
+        return $res->withRedirect($this->router->pathFor('contact-us'));
         
     }
 
