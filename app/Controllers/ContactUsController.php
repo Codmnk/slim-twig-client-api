@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-
+use Respect\Validation\Validator as v;
 use App\config\Smtp;
 
 class ContactUsController extends Controller
@@ -18,28 +18,19 @@ class ContactUsController extends Controller
         
         $frmData = $req->getParams();
 
-    
-        // echo "<pre>";
-        // var_dump($frmData);
+        $validation = $this->validator->validate($req, [
+            'firstName' => v::notEmpty()->alpha(),
+            'lastName' => v::notEmpty()->alpha(),
+            'email' => v::noWhitespace()->notEmpty()->email(),
+            'contactNumber' => v::optional(v::intVal()),
+            'orderNumber' => v::optional(v::intVal()),
+            'subject' => v::notEmpty(),
+            'message' => v::notEmpty()
+        ]);
 
-        // FORM DATA AS BELOW
-        // array(7) {
-        //     ["firstName"]=>
-        //     string(4) "PREM"
-        //     ["lastName"]=>
-        //     string(7) "ACHARYA"
-        //     ["email"]=>
-        //     string(22) "made_4_youuu@yahoo.com"
-        //     ["contactNumber"]=>
-        //     string(9) "450533936"
-        //     ["orderNumber"]=>
-        //     string(4) "9754"
-        //     ["subject"]=>
-        //     string(15) "General Enquiry"
-        //     ["message"]=>
-        //     string(11) "kjlfasjlfas"
-        //   }
-        
+        if($validation->validationFailed()){
+            return $res->withRedirect($this->router->pathFor('contact-us'));
+        }
 
         // // GET ATTACHEMENT NAMED 'attach'
         // $attach = $req->getUploadedFiles();
@@ -63,4 +54,6 @@ class ContactUsController extends Controller
         // } 
         
     }
+
+    
 }

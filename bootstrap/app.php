@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -35,6 +37,10 @@ $container['view'] = function($container) {
 };
 
 
+$container['validator'] = function($container){
+     return new App\Validation\Validator;
+};
+
 $container['HomeController'] = function($container){
     return new \App\Controllers\HomeController($container);
 };
@@ -46,5 +52,10 @@ $container['CategoryController'] = function($container){
 $container['ContactUsController'] = function($container){
     return new \App\Controllers\ContactUsController($container);
 };
+
+$app->add(new \App\Middleware\validationErrorsMiddleware($container));
+$app->add(new \App\Middleware\PresistDataMiddleware($container));
+
+
 
 require '../app/routes.php';
