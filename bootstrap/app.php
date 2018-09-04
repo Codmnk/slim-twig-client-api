@@ -60,7 +60,7 @@ $container['csrf'] = function($container){
     return new \Slim\Csrf\Guard;
 };
 
-$app->add(new \App\Middleware\validationErrorsMiddleware($container));
+$app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\PresistDataMiddleware($container));
 $app->add(new \App\Middleware\CsrfViewMiddleware($container));
 
