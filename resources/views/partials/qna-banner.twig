@@ -13,9 +13,10 @@
 			<div class="inner">
 				<header>
 					<h1>{{ catInfo.title }}</h1>
-					<form action="/hc/search" method="post">
+					<form action="{{ path_for('search') }}" method="post" enctype="multipart/form-data">
 						<input type="search" name="searchString" class="search-box" placeholder="Enter your question ..">
 						<input type="submit" value="Search" class="btn btn-large search-botton" />
+						{{ csrf.field | raw }}
 					</form>
 					<p><strong>Find the Q/A below or do the search again.</strong></p>
 	
