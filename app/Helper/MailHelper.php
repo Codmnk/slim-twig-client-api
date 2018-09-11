@@ -51,7 +51,7 @@ class MailHelper
         $mailBody = " Name: " . $emailData['firstName'] . " " .  $emailData['lastName'] . "<br /> Contact: " . $emailData['contactNumber'] . "<br /> <br /> Message: <br /> " . $emailData['message'];
         
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = $emailData['subject'] . " " . $emailData['orderNumber'];
+        $mail->Subject = $emailData['subject'] . "  #" . $emailData['orderNumber'];
         //$mail->Body    = $emailData['message'];
         $mail->Body    = $mailBody;
         // $mail->AltBody = strip_tags($emailData['message']);
