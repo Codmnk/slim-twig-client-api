@@ -9,3 +9,4 @@ This is a simple client side rendering boiler plate which allows you to fetch da
 5. Update the ` Endpoint.php ` file with your API endpoint.
 
 ## How to use?
+1. ` mkdir public/frontEnd/uploads/images/ ` where all the images goes.
