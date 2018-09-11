@@ -56,6 +56,10 @@ $container['ContactUsController'] = function($container){
     return new \App\Controllers\ContactUsController($container);
 };
 
+$container['SearchController'] = function($container){
+    return new \App\Controllers\SearchController($container);
+};
+
 $container['csrf'] = function($container){
     return new \Slim\Csrf\Guard;
 };

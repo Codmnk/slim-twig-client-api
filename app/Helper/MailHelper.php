@@ -14,29 +14,30 @@ class MailHelper
 
     public function sendEmail($data)
     {
-        $emailDat = $data;
+        $emailData = $data;
 
         $smtp = new Smtp();
+		
         $mail = new PHPMailer(true);
 
-        
+      
     try {
         //Server settings
-        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-        $mail->isSMTP();                                      // Set mailer to use SMTP
+         $mail->SMTPDebug = 0;           // Enable verbose debug output
+        $mail->isSMTP();                  // Set mailer to use SMTP
         $mail->Host = $smtp->SMTP['host'];  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = $smtp->SMTP['Username'];                 // SMTP username
-        $mail->Password = $smtp->SMTP['Password'];                           // SMTP password
-        $mail->SMTPSecure = 'tsl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->SMTPAuth = false;               // Enable SMTP authentication
+        $mail->Username = $smtp->SMTP['username'];    // SMTP username
+        $mail->Password = $smtp->SMTP['password'];        // SMTP password
+        $mail->SMTPSecure = 'tsl';    // Enable TLS encryption, `ssl` also accepted
         $mail->Port = $smtp->SMTP['port']; // TCP port to connect to
-
+     
         //Recipients
-        $mail->setFrom($smtp->SMTP['Username'], $emailDat['firstName']);
-        // $mail->setFrom($emailDat['email'], $emailDat['firstName'] . " " . $emailDat['lastName']);
-        $mail->addAddress($smtp->SMTP['Username'], 'Web Form');     // Add a recipient
+        $mail->setFrom($smtp->SMTP['username'], 'Web Form');
+        $mail->addAddress($smtp->SMTP['username'], 'Customer Service');     // Add a recipient
         // $mail->addAddress('ellen@example.com');               // Name is optional
-        $mail->addReplyTo($emailDat['email'], $emailDat['firstName'] . " " . $emailDat['lastName']);
+        $mail->addReplyTo($emailData['email'], $emailData['firstName'] . " " . $emailData['lastName']);
+        //$mail->addReplyTo("help@bigdiscount.com.au", "Premo");
         // $mail->addCC('cc@example.com');
         // $mail->addBCC('bcc@example.com');
 
@@ -48,15 +49,13 @@ class MailHelper
 
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = $emailDat['subject'];
-        $mail->Body    = $emailDat['message'];
-        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+        $mail->Subject = $emailData['subject'];
+        //$mail->Body    = $emailData['message'];
+        $mail->Body    = $emailData['message'];
+        $mail->AltBody = strip_tags($emailData['message']);
+		
         $mail->send();
-        // echo "<pre>";
-        // var_dump($result);
-        // die();
-
+        
         return 'Success';
     } catch (Exception $e) {
         return "Message could not be sent. Mailer Error:  $mail->ErrorInfo";

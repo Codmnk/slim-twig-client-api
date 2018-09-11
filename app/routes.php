@@ -18,3 +18,7 @@ $app->get('/contact-us', 'ContactUsController:index')->setName('contact-us');
 
 // GET FORM DATA AND SEND EMAIL
 $app->post('/sendmail', 'ContactUsController:sendMail');
+
+
+//HANDLE THE SEAERCH FORM REQUEST
+$app->post('/search', 'SearchController:index')->setName('search');

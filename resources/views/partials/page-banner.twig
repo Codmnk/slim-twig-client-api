@@ -7,9 +7,10 @@
 	<div class="inner">
 		<header>
 			<h1>Help Center</h1>
-			<form action="/hc/search" method="post">
-				<input type="search" name="searchString" class="search-box" placeholder="Enter your question ..">
+			<form action="{{path_for('search')}}" method="post" enctype="multipart/form-data">
+				<input required type="search" name="searchString" class="search-box" placeholder="Enter your question ..">
 				<input type="submit" value="Search" class="btn btn-large search-botton" />
+				{{ csrf.field | raw }}
 			</form>
 			<p>Please enter you question and press search botton or search by the inquiry type as available below.</p>
 

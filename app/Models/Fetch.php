@@ -8,6 +8,7 @@ class Fetch {
     protected $SITE_URL = 'https://www.bigdiscount.com.au/hc/hc-api/public/';
     protected $CATEGORIES_ENDPOINT = 'categories';
     protected $QNA_ENDPOINT = 'category/';
+    protected $SEARCH_ENDPOINT = 'search/';
 
 
     public function getCategories()
@@ -51,6 +52,24 @@ class Fetch {
                     'catThumbnail' => $catArgs[$i]->catThumbnail
                     );
             }
+        }
+    }
+
+    // RETUTN SEARCH RESULT
+    public function getSearchResult($s)
+    {
+        $this->SEARCH_ENDPOINT .= trim($s);
+
+        try{
+            //FOR E.G.     https://www.bigdiscount.com.au/hc/hc-api/public/search/warranty+policy
+            $response = file_get_contents($this->SITE_URL . $this->SEARCH_ENDPOINT);
+            $response = json_decode($response);
+            
+            return $response;
+
+        }catch(Exception $e){
+            $response = '{"Error": {"Message": "$e->getMessage"}}';
+            return $response; 
         }
     }
 }
