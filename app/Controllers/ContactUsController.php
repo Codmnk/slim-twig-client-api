@@ -40,16 +40,6 @@ class ContactUsController extends Controller
             return $res->withRedirect($this->router->pathFor('contact-us'));
         }
 
-        
-        
-        
-
-        // echo "<pre>";
-        // // var_dump($newFile);
-        // echo $newFile->getClientFilename();
-        // // echo $newFile->getClientFilesize();
-         
-        // die();
 
         if($newFile->getError() === UPLOAD_ERR_OK){
             $uploadDir = __DIR__ . '/../../public/frontEnd/uploads/images/emails/' . $newFile->getClientFilename();
@@ -57,9 +47,9 @@ class ContactUsController extends Controller
             
             $filename = move_uploaded_file($tempFile, $uploadDir);
             if($filename){
-                array_push($frmData, "attach", $newFile->getClientFilename());
+                $frmData["attach"] = $newFile->getClientFilename();
             }else {
-                array_push($frmData, "attach", null);
+                $frmData["attach"] = null;
             }
 
         }else{
