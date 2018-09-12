@@ -11,11 +11,13 @@ use PHPMailer\PHPMailer\Exception;
 class MailHelper
 {
     protected $emailDat;
-    protected $emailMdeiaDir = __DIR__ . '/../../public/frontEnd/uploads/images/emails/';
+     
 
     public function sendEmail($data)
     {
         $emailData = $data;
+
+        $emailMdeiaDir = __DIR__ . '/../../public/frontEnd/uploads/images/emails/';
 
         $smtp = new Smtp();
 		
@@ -42,12 +44,11 @@ class MailHelper
         // $mail->addCC('cc@example.com');
         // $mail->addBCC('bcc@example.com');
 
+        
         // Attachments
         if($emailData['attach']){
             // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
             $emailMediaFullPath = $emailMdeiaDir . $emailData['attach'];
-            // echo $emailMediaFullPath;
-            // die();
             $mail->addAttachment($emailMediaFullPath);    // Optional name
             // $mail->addAttachment($emailMediaFullPath, 'new.jpg');    // Optional name
         }
