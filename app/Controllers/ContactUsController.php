@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Slim\Http\UploadedFile;
 use Respect\Validation\Validator as v;
 use App\Helper\MailHelper as mailHelper; 
 
@@ -15,7 +16,13 @@ class ContactUsController extends Controller
 
     public function sendMail($req, $res)
     {
+        // GET FILE DATA
         $frmData = $req->getParams();
+
+        
+        // GET ATTACHEMENT NAMED 'attach'
+        $uploadedFiles = $req->getUploadedFiles();
+        $newFile = $uploadedFiles['attach'];
 
         $validation = $this->validator->validate($req, [
             'firstName' => v::notEmpty()->alpha(),
@@ -24,7 +31,9 @@ class ContactUsController extends Controller
             'contactNumber' => v::optional(v::intVal()),
             'orderNumber' => v::optional(v::intVal()),
             'subject' => v::notEmpty(),
-            'message' => v::notEmpty()
+            'message' => v::notEmpty(),
+            // 'attach' => v::optional(v::file()->validate(__FILE__)),
+            // 'attach' => v::optional(v::size('5B', '15MB')->validate($req->getUploadedFiles()['attach']))
         ]);
 
         if($validation->validationFailed()){
@@ -33,15 +42,29 @@ class ContactUsController extends Controller
 
         
         
-        // // GET ATTACHEMENT NAMED 'attach'
-        // $attach = $req->getUploadedFiles();
-        // $newFile = $attach['attach'];
+        
 
-        // if($newFile->getError() === UPLOAD_ERR_OK){
-        //     //VALIDATE THE IMAGE AND PROCESS
-        // }else{
-        //     array_push($formData, array('attachment' => false));
-        // }
+        // echo "<pre>";
+        // // var_dump($newFile);
+        // echo $newFile->getClientFilename();
+        // // echo $newFile->getClientFilesize();
+         
+        // die();
+
+        if($newFile->getError() === UPLOAD_ERR_OK){
+            $uploadDir = __DIR__ . '/../../public/frontEnd/uploads/images/emails/' . $newFile->getClientFilename();
+            $tempFile = $_FILES["attach"]["tmp_name"];
+            
+            $filename = move_uploaded_file($tempFile, $uploadDir);
+            if($filename){
+                array_push($frmData, "attach", $newFile->getClientFilename());
+            }else {
+                array_push($frmData, "attach", null);
+            }
+
+        }else{
+            var_dump($frmData->getError());
+        }
         
         
         $result = mailHelper::sendEmail($frmData);

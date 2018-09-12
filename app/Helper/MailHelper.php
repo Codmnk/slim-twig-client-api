@@ -11,6 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 class MailHelper
 {
     protected $emailDat;
+    protected $emailMdeiaDir = __DIR__ . '/../../public/frontEnd/uploads/images/emails/';
 
     public function sendEmail($data)
     {
@@ -41,11 +42,15 @@ class MailHelper
         // $mail->addCC('cc@example.com');
         // $mail->addBCC('bcc@example.com');
 
-        //Attachments
-        // if($args->attach){
-        //     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-        //     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-        // }
+        // Attachments
+        if($emailData['attach']){
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+            $emailMediaFullPath = $emailMdeiaDir . $emailData['attach'];
+            // echo $emailMediaFullPath;
+            // die();
+            $mail->addAttachment($emailMediaFullPath);    // Optional name
+            // $mail->addAttachment($emailMediaFullPath, 'new.jpg');    // Optional name
+        }
 
         //Content
         $mailBody = " Name: " . $emailData['firstName'] . " " .  $emailData['lastName'] . "<br /> Contact: " . $emailData['contactNumber'] . "<br /> <br /> Message: <br /> " . $emailData['message'];
