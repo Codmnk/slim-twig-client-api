@@ -30,9 +30,9 @@ class Validator
             
         
 
-            $allowFileSize = 15728640; //15MB
+            $allowFileSize = 20971520; //20MB
             if($fSize >  $allowFileSize) {
-                $this->errors['attach'] = [ "File is too larg. Do not exceed 15MB file size" ];
+                $this->errors['attach'] = [ "File is too larg. Do not exceed 20MB file size" ];
             }
             if(!in_array($fType, $this->allowFileTpes)){
                 $this->errors['attach'] = [ "Only Image or Video file allowed." ];

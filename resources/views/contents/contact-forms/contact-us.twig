@@ -21,7 +21,7 @@
         {# {% for error in formError %} <div class="alert alert-danger">{{this}}</div> {% endfor %}     #}
 
         {% if errors %}
-            <div class="alert alert-danger">Please revie errors below and try angain.</div>
+            <div class="alert alert-danger">Please revie the errors below and try angain.</div>
         {% endif  %} 
     </div>
     <div class="row"> 
@@ -84,7 +84,7 @@
                         {% endif %}
                     </div>  
                     <div class="form-group{{ errors.attach ? ' has-error' : '' }}">
-                        <label for="attach"> Only image and video allowed. Do not exceed 10MB file size.</label>
+                        <label for="attach"> Only image and video allowed. Do not exceed 20MB file size.</label>
                         <label for="attach">Attachements</label>
                         {% if errors.attach %}
                             <span class="help-block">{{ errors.attach | first }}</span>
