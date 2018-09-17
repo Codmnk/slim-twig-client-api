@@ -36,6 +36,8 @@ class ContactUsController extends Controller
             // 'attach' => v::optional(v::size('5B', '15MB')->validate($req->getUploadedFiles()['attach']))
         ]);
 
+       
+
         if($validation->validationFailed()){
             return $res->withRedirect($this->router->pathFor('contact-us'));
         }
@@ -53,7 +55,7 @@ class ContactUsController extends Controller
             }
 
         }else{
-            var_dump($frmData->getError());
+            // var_dump($frmData->getError());
         }
         
         
@@ -65,6 +67,11 @@ class ContactUsController extends Controller
             $this->flash->addMessage('error', $result . " Please try again later, or send an email to help@bigdiscount.com.au.");
         }
         
+        //REMOVE THE MEDIAFILE AFTER EMAIL IS BEING SENT
+        if(file_exists($uploadDir)){
+            unlink($uploadDir);
+        }
+
         return $res->withRedirect($this->router->pathFor('contact-us'));
         
     }
