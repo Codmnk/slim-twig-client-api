@@ -21,8 +21,8 @@ class Validator
             }
         }
 
-
-        if(isset($_FILES)){
+        // MINIMUM FILE SIZE 10B
+        if($_FILES['attach']['size'] > 10){
             // FILE VALIDATION
             $fType = $_FILES['attach']['type'];
             $fSize = $_FILES['attach']['size'];
