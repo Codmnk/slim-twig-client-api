@@ -22,7 +22,7 @@ class Validator
         }
 
 
-        if(isset($_FILES)){
+        if($_FILES['attach']['size'] > 10){
             // FILE VALIDATION
             $fType = $_FILES['attach']['type'];
             $fSize = $_FILES['attach']['size'];
