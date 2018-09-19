@@ -24,9 +24,23 @@
             <div class="alert alert-danger">Please revie the errors below and try angain.</div>
         {% endif  %} 
     </div>
+    <style type="text/css">
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.75) url({{ base_url() }}/frontEnd/media/spinner.gif) no-repeat center center;
+            z-index: 10000;
+            }
+    </style>
+    
     <div class="row"> 
         <h3>Contact Us</h3> 
-             <form action="{{ base_url() }}/sendmail" method="post" enctype="multipart/form-data">
+             <form action="{{ base_url() }}/sendmail" method="post" id="webFrm" enctype="multipart/form-data" >
                 <div class="form-group" style="font-size:20px"> 
                     <div class="form-group{{ errors.firstName ? ' has-error' : '' }}">
                         <label for="firstName">First name *</label>
@@ -89,8 +103,7 @@
                         {% if errors.attach %}
                             <span class="help-block">{{ errors.attach | first }}</span>
                         {% endif %}
-                        <input type="file" name="attach" id="attach"  >
-                        
+                        <input type="file" name="attach" id="attach"  onchange="validataFile()" >
 
                         <!-- <span type="addMore" id="addMore" class="btn btn-primary" onclick="addmoreFiles()" >+ Add More files</span> -->
                     </div>
@@ -105,5 +118,52 @@
             </form> 
     </div>
 </div>
+<div id="loader"></div>
+
+<script>
+        function _(el) {
+        return document.getElementById(el);
+        }
+
+        var allowMimeType = /image|video/;
+        var allowFileSize = 20000000;
+        function validataFile(){
+            let fileType = _('attach').files[0].type;
+            let fileSize = _('attach').files[0].size;
+
+            if(!allowMimeType.test(fileType)){
+                alert('Invalid File! Only image or video file allowed.');
+                resetAttach();
+            }
+            
+            if(fileSize > allowFileSize){
+                alert('File too large! filel larger than 20MB is not allowed.');
+                resetAttach();
+            }
+            
+        }
+
+        function resetAttach(){
+            _('attach').value = null
+        }
+</script>
+
+
+
 {# <!-- Footer --> #}
 {% include "partials/footer.twig" %} 
+
+
+<script>
+var spinner = $('#loader');
+ 
+$(function() {
+  $('form').submit(function(e) {
+    e.preventDefault();
+  
+    spinner.show();
+    $(this).unbind('submit').submit()
+  });
+});
+</script>
+
